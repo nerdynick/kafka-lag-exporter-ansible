@@ -1,0 +1,9 @@
+---
+- name: Install
+  import_tasks: install.yml
+- name: SSL
+  import_tasks: ssl.yml
+- name: GSSAPI
+  import_tasks: gssapi.yml
+- name: Config
+  import_tasks: config.yml

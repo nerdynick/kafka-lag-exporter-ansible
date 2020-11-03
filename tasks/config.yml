@@ -1,0 +1,33 @@
+---
+- name: Configuring Logging
+  template:
+    src: logback.xml.j2
+    dest: "{{kafka_lag_exporter_config_dir}}/logback.xml"
+    mode: 0644
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  notify: restart lag-exporter
+- name: Configuring Kafka Lag Exporter
+  template:
+    src: application.conf.j2
+    dest: "{{kafka_lag_exporter_config_dir}}/application.conf"
+    mode: 0644
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  notify: restart lag-exporter
+- name: Configuring Kafka Lag Exporter System.d
+  template:
+    src: systemd.conf.j2
+    dest: "{{kafka_lag_exporter_service_systemd_file}}"
+    mode: 0644
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  notify: restart lag-exporter
+- name: Configuring Kafka Lag Exporter System.d Override
+  template:
+    src: override.conf.j2
+    dest: "{{kafka_lag_exporter_service_systemd_override}}"
+    mode: 0644
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  notify: restart lag-exporter

@@ -1,2 +1,3 @@
 ---
-# handlers file for kafka-lag-exporter-ansible
+- name: restart lag-exporter
+  include_tasks: tasks/restart.yml

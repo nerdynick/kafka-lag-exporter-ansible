@@ -1,2 +1,9 @@
 ---
-# vars file for kafka-lag-exporter-ansible
+kafka_lag_exporter_internal_ssl_enabled: false
+kafka_lag_exporter_internal_ssl_keystore_properties: 
+  ssl.keystore.location: "{{kafka_lag_exporter_ssl_keystore_dest}}"
+  ssl.keystore.password: "{{kafka_lag_exporter_ssl_keystore_store_password}}"
+  ssl.key.password: "{{kafka_lag_exporter_ssl_keystore_key_password}}"
+kafka_lag_exporter_internal_ssl_truststore_properties: 
+  ssl.truststore.location: "{{kafka_lag_exporter_ssl_truststore_dest}}"
+  ssl.truststore.password: "{{kafka_lag_exporter_ssl_truststore_store_password}}"

@@ -1,0 +1,49 @@
+---
+- name: Create Install Directory
+  file:
+    path: "{{kafka_lag_exporter_install_dir}}"
+    state: directory
+    mode: 0755
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+- name: Downloading/Unarchiving from URL
+  unarchive:
+    src: "{{kafka_lag_exporter_download_url}}"
+    dest: "{{kafka_lag_exporter_install_dir}}"
+    creates: "{{kafka_lag_exporter_install_jar}}"
+    remote_src: yes
+    mode: 0755
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  when: kafka_lag_exporter_download|bool
+- name: Uploading/Unarchiving from URL
+  unarchive:
+    src: "{{kafka_lag_exporter_upload_path}}"
+    dest: "{{kafka_lag_exporter_install_dir}}"
+    creates: "{{kafka_lag_exporter_install_jar}}"
+    remote_src: yes
+    mode: 0755
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  when: kafka_lag_exporter_upload|bool
+- name: Create Config directory
+  file:
+    path: "{{ kafka_lag_exporter_config_dir }}"
+    state: directory
+    mode: 0750
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+- name: Create Logs Directory
+  file:
+    path: "{{kafka_broker.appender_log_path}}"
+    state: directory
+    group: "{{kafka_lag_exporter_group}}"
+    owner: "{{kafka_lag_exporter_user}}"
+    mode: 0770
+- name: Create Service Override Directory
+  file:
+    path: "{{kafka_lag_exporter_service_systemd_override | dirname }}"
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+    state: directory
+    mode: 0640

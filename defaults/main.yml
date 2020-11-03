@@ -2,9 +2,22 @@
 ##
 # Installation Configs
 ##
+kafka_lag_exporter_version: 0.6.5
+kafka_lag_exporter_service_name: "kafka-lag-exporter"
+kafka_lag_exporter_service_systemd_file: /usr/lib/systemd/system/{{kafka_lag_exporter_service_name}}.service
+kafka_lag_exporter_service_systemd_override: /etc/systemd/system/{{kafka_lag_exporter_service_name}}.service.d/override.conf
+
 kafka_lag_exporter_user: kafkalag
 kafka_lag_exporter_group: kafkalag 
+
 kafka_lag_exporter_config_dir: "/etc/kafka-lag-exporter"
+kafka_lag_exporter_install_dir: "/etc/kafka-lag-exporter"
+kafka_lag_exporter_install_jar: "{{kafka_lag_exporter_install_dir}}/lib/com.lightbend.kafkalagexporter.kafka-lag-exporter-{{kafka_lag_exporter_version}}.jar"
+
+kafka_lag_exporter_download: true
+kafka_lag_exporter_download_url: "https://github.com/lightbend/kafka-lag-exporter/releases/download/v{{kafka_lag_exporter_version}}/kafka-lag-exporter-{{kafka_lag_exporter_version}}.zip"
+kafka_lag_exporter_upload: false
+kafka_lag_exporter_upload_path: ""
 
 ##
 # General Configs
@@ -13,6 +26,27 @@ kafka_lag_exporter_poll_interval: "30 seconds"
 kafka_lag_exporter_client_group_id: "kafkalagexporter"
 kafka_lag_exporter_client_timeout: "10 seconds"
 kafka_lag_exporter_lookup_table_size: 60
+kafka_lag_exporter_environment_overrides: {}
+kafka_lag_exporter_metric_whitelist: 
+- ".*"
+
+##
+# Logging Configs
+##
+
+# General Settings
+kafka_lag_exporter_logging_dir: "/var/log/kafka-lag-exporter"
+kafka_lag_exporter_logging_pattern: "%date{ISO8601} %-5level %logger{36} %X{akkaSource} - %msg %ex%n"
+kafka_lag_exporter_logging_root_level: "INFO"
+kafka_lag_exporter_logging_exporter_level: "INFO"
+kafka_lag_exporter_logging_kafka_level: "INFO"
+
+# Retention Policies
+kafka_lag_exporter_logging_policy_days: 7
+kafka_lag_exporter_logging_policy_total_size: "3GB"
+kafka_lag_exporter_logging_policy_file_size: "1GB"
+
+
 
 ##
 # Reporters
@@ -26,3 +60,27 @@ kafka_lag_exporter_reporters_prometheus_port: 8000
 kafka_lag_exporter_reporters_graphite_enabled: false
 kafka_lag_exporter_reporters_graphite_port: ""
 kafka_lag_exporter_reporters_graphite_host: ""
+
+##
+# Cluster(s) Config
+##
+
+# SSL Settings
+
+
+kafka_lag_exporter_ssl_keystore_dest: /var/ssl/private/kafka-lag-exporter.keystore.jks
+kafka_lag_exporter_ssl_truststore_dest: /var/ssl/private/kafka-lag-exporter.keystore.jks
+kafka_lag_exporter_ssl_keystore_src: ""
+kafka_lag_exporter_ssl_keystore_key_password: ""
+kafka_lag_exporter_ssl_keystore_store_password: ""
+kafka_lag_exporter_ssl_truststore_src: ""
+kafka_lag_exporter_ssl_truststore_password:  ""
+
+kafka_lag_exporter_clusters: 
+- name: "Localhost"
+  servers: 
+  - localhost
+  port: 9092
+  ssl_enabled: false
+  ssl_mutual_auth_enabled: false
+  sasl_protocol: none

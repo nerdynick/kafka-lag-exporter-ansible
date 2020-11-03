@@ -37,5 +37,4 @@ MIT
 Author Information
 ------------------
 
-Nikoleta Verbeck
-Github: @nerdynick
+Nikoleta Verbeck | Github/@nerdynick

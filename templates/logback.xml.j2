@@ -1,0 +1,27 @@
+<configuration>
+    <variable name="ROOT_LOG_LEVEL" value="${ROOT_LOG_LEVEL:-{{kafka_lag_exporter_logging_root_level}}}" />
+    <variable name="KAFKA_LAG_EXPORTER_LOG_LEVEL" value="${KAFKA_LAG_EXPORTER_LOG_LEVEL:-{{kafka_lag_exporter_logging_exporter_level}}}" />
+    <variable name="KAFKA_LAG_EXPORTER_KAFKA_LOG_LEVEL" value="${KAFKA_LAG_EXPORTER_KAFKA_LOG_LEVEL:-{{kafka_lag_exporter_logging_kafka_level}}}" />
+    <appender name="FILE" class="ch.qos.logback.core.RollingFileAppender">
+        <file>{{kafka_lag_exporter_logging_dir}}/exporter.log</file>
+        <encoder>
+            <pattern>{{kafka_lag_exporter_logging_pattern}}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>exporter-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <maxFileSize>{{kafka_lag_exporter_logging_policy_file_size}}</maxFileSize>    
+            <maxHistory>{{kafka_lag_exporter_logging_policy_days}}</maxHistory>
+            <totalSizeCap>{{kafka_lag_exporter_logging_policy_total_size}}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>{{kafka_lag_exporter_logging_pattern}}</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.apache.kafka" level="${KAFKA_LAG_EXPORTER_KAFKA_LOG_LEVEL}"/>
+    <logger name="com.lightbend.kafkalagexporter" level="${KAFKA_LAG_EXPORTER_LOG_LEVEL}"/>
+    <root level="${ROOT_LOG_LEVEL}">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

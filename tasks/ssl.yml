@@ -1,0 +1,28 @@
+---
+- name: Create SSL Directories
+  file:
+    path: "{{item}}"
+    state: directory
+    mode: 0755
+  with_items:
+  - "{{kafka_lag_exporter_ssl_keystore_dest | dirname}}"
+  - "{{kafka_lag_exporter_ssl_truststore_dest | dirname}}"
+  when: kafka_lag_exporter_ssl_keystore_src != "" or kafka_lag_exporter_ssl_truststore_src != ""
+- name: Copy Host Keystore to Host
+  copy:
+    src: "{{kafka_lag_exporter_ssl_keystore_src}}"
+    dest: "{{kafka_lag_exporter_ssl_keystore_dest}}"
+    mode: 0644
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  when: kafka_lag_exporter_ssl_keystore_src != ""
+  notify: restart lag-exporter
+- name: Copy Host Truststore to Host
+  copy:
+    src: "{{kafka_lag_exporter_ssl_truststore_src}}"
+    dest: "{{kafka_lag_exporter_ssl_truststore_dest}}"
+    mode: 0644
+    owner: "{{kafka_lag_exporter_user}}"
+    group: "{{kafka_lag_exporter_group}}"
+  when: kafka_lag_exporter_ssl_truststore_src != ""
+  notify: restart lag-exporter
