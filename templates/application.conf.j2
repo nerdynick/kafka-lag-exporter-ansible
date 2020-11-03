@@ -16,7 +16,7 @@ kafka-lag-exporter {
     lookup-table-size = {{ kafka_lag_exporter_lookup_table_size }}
     client-group-id = {{ kafka_lag_exporter_client_group_id }}
     kafka-client-timeout = {{ kafka_lag_exporter_client_timeout }}
-    metric-whitelist = {{kafka_lag_exporter_metric_whitelist | to_json}}
+    metric-whitelist = {{ kafka_lag_exporter_metric_whitelist | to_json }}
     clusters = [
         {% for cluster in kafka_lag_exporter_clusters %}
         {
@@ -42,15 +42,15 @@ kafka-lag-exporter {
             }
 
             {% if cluster.topic_whitelist is defined %}
-            topic-whitelist = "{{cluster.topic_whitelist | to_json}}"
+            topic-whitelist = "{{ cluster.topic_whitelist | to_json }}"
             {% endif %}
 
             {% if cluster.topic_blacklist is defined %}
-            topic-blacklist = "{{cluster.topic_blacklist | to_json}}"
+            topic-blacklist = "{{ cluster.topic_blacklist | to_json }}"
             {% endif %}
 
             {% if cluster.group_whitelist is defined %}
-            group-whitelist = "{{cluster.group_whitelist | to_json}}"
+            group-whitelist = "{{ cluster.group_whitelist | to_json }}"
             {% endif %}
 
             {% if cluster.labels is defined %}
