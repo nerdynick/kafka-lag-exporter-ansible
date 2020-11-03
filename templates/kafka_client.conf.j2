@@ -3,13 +3,13 @@ security.protocol="SSL"
 
 {% if kafka_lag_exporter_ssl_truststore_src != "" %}
 {% for key,value in kafka_lag_exporter_internal_ssl_truststore_properties.items() %}
-{{key}}="{{value}}"
+{{ key }}="{{ value }}"
 {% endfor %}
 {% endif %}
 
 {% if cluster.ssl_mutual_auth_enabled is defined and cluster.ssl_mutual_auth_enabled|bool %}
 {% for key,value in kafka_lag_exporter_internal_ssl_keystore_properties.items() %}
-{{key}}="{{value}}"
+{{ key }}="{{ value }}"
 {% endfor %}
 {% endif %}
 
@@ -36,6 +36,6 @@ sasl.jaas.config="com.sun.security.auth.module.Krb5LoginModule required useKeyTa
 
 {% if cluster.properties is defined %}
 {% for key,value in properties.properties.items() %}
-{{key}}="{{value}}"
+{{ key }}="{{ value }}"
 {% endfor %}
 {% endif %}

@@ -4,11 +4,11 @@ After=network.target
 
 [Service]
 Type=simple
-User={{kafka_lag_exporter_user}}
-Group={{kafka_lag_exporter_group}}
-ExecStart={{kafka_lag_exporter_install_dir}}/bin/kafka-lag-exporter \
-    -Dconfig.file={{kafka_lag_exporter_config_dir}}/application.conf \ 
-    -Dlogback.configurationFile={{kafka_lag_exporter_config_dir}}/logback.xml
+User={{ kafka_lag_exporter_user }}
+Group={{ kafka_lag_exporter_group }}
+ExecStart={{ kafka_lag_exporter_install_dir }}/bin/kafka-lag-exporter \
+    -Dconfig.file={{ kafka_lag_exporter_config_dir }}/application.conf \ 
+    -Dlogback.configurationFile={{ kafka_lag_exporter_config_dir }}/logback.xml
 LimitNOFILE=1000000
 TimeoutStopSec=180
 Restart=no

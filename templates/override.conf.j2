@@ -1,6 +1,6 @@
 [Service]
 {% for key, value in kafka_lag_exporter_environment_overrides.items() %}
 {% if value %}
-Environment="{{key}}={{value}}"
+Environment="{{ key }}={{ value }}"
 {% endif %}
 {% endfor %}

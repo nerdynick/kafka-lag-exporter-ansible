@@ -2,20 +2,20 @@ kafka-lag-exporter {
     reporters {
         {% if kafka_lag_exporter_reporters_prometheus_enabled|bool %}
         prometheus {
-            port = {{kafka_lag_exporter_reporters_prometheus_port}}
+            port = {{ kafka_lag_exporter_reporters_prometheus_port }}
         }
         {% endif %}
         {% if kafka_lag_exporter_reporters_graphite_enabled|bool %}
         graphite {
-            host = {{kafka_lag_exporter_reporters_graphite_host}}
-            port = {{kafka_lag_exporter_reporters_graphite_port}}
+            host = {{ kafka_lag_exporter_reporters_graphite_host }}
+            port = {{ kafka_lag_exporter_reporters_graphite_port }}
         }
         {% endif %}
     }
-    poll-interval = {{kafka_lag_exporter_poll_interval}}
-    lookup-table-size = {{kafka_lag_exporter_lookup_table_size}}
-    client-group-id = {{kafka_lag_exporter_client_group_id}}
-    kafka-client-timeout = {{kafka_lag_exporter_client_timeout}}
+    poll-interval = {{ kafka_lag_exporter_poll_interval }}
+    lookup-table-size = {{ kafka_lag_exporter_lookup_table_size }}
+    client-group-id = {{ kafka_lag_exporter_client_group_id }}
+    kafka-client-timeout = {{ kafka_lag_exporter_client_timeout }}
     metric-whitelist = {{kafka_lag_exporter_metric_whitelist | to_json}}
     clusters = [
         {% for cluster in kafka_lag_exporter_clusters %}
@@ -27,7 +27,7 @@ kafka-lag-exporter {
 
                 {% if cluster.consumer_properties is defined %}
                 {% for key,value in properties.consumer_properties.items() %}
-                {{key}}="{{value}}"
+                {{ key }}="{{ value }}"
                 {% endfor %}
                 {% endif %}
             }
@@ -36,7 +36,7 @@ kafka-lag-exporter {
                 
                 {% if cluster.admin_properties is defined %}
                 {% for key,value in properties.admin_properties.items() %}
-                {{key}}="{{value}}"
+                {{ key }}="{{ value }}"
                 {% endfor %}
                 {% endif %}
             }
@@ -56,7 +56,7 @@ kafka-lag-exporter {
             {% if cluster.labels is defined %}
             labels = {
                 {% for key,value in cluster.labels.items() %}
-                {{key}}="{{value}}"
+                {{ key }}="{{ value }}"
                 {% endfor %}
             }
             {% endif %}

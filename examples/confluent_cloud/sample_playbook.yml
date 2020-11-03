@@ -3,6 +3,9 @@
   hosts: kafka_lag_exporter
   gather_facts: true
   tasks:
+  - name: Install Java
+    import_role: 
+      name: java
   - name: Install/Config
     import_role: 
       name: kafka-lag-exporter-ansible
