@@ -1,0 +1,8 @@
+---
+- name: Kafka Lag Exporter Install/Config
+  hosts: kafka_lag_exporter
+  gather_facts: true
+  tasks:
+  - name: Install/Config
+    import_role: 
+      name: kafka-lag-exporter-ansible

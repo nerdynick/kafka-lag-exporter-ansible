@@ -1,0 +1,15 @@
+all:
+  vars:
+    ansible_become: true
+    kafka_lag_exporter_reporters_prometheus_enabled: true
+    kafka_lag_exporter_clusters:
+    - name: ccloud
+      servers: 
+      - "{{vault_bootstrap_address}}:9092"
+      ssl_enabled: true
+      sasl_protocol: plain
+      username: "{{vault_username}}"
+      password: "{{vault_password}}"
+kafka_lag_exporter:
+  hosts:
+    ccc01.c1.nikoleta.aws.ps.confluent.io:

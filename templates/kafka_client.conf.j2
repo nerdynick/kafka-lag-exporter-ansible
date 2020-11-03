@@ -1,0 +1,41 @@
+{% if cluster.ssl_enabled is defined and cluster.ssl_enabled|bool %}
+security.protocol="SSL"
+
+{% if kafka_lag_exporter_ssl_truststore_src != "" %}
+{% for key,value in kafka_lag_exporter_internal_ssl_truststore_properties.items() %}
+{{key}}="{{value}}"
+{% endfor %}
+{% endif %}
+
+{% if cluster.ssl_mutual_auth_enabled is defined and cluster.ssl_mutual_auth_enabled|bool %}
+{% for key,value in kafka_lag_exporter_internal_ssl_keystore_properties.items() %}
+{{key}}="{{value}}"
+{% endfor %}
+{% endif %}
+
+{% endif %}
+
+{% if cluster.sasl_protocol is defined and cluster.sasl_protocol != none %}
+sasl.mechanism="{{cluster.sasl_protocol|upper}}"
+
+{% if cluster.ssl_enabled is defined and cluster.ssl_enabled|bool %}
+security.protocol="SASL_SSL"
+{% else %}
+security.protocol="SASL_PLAINTEXT"
+{% endif %}
+
+{% if cluster.sasl_protocol|upper == "PLAIN" %}
+sasl.jaas.config="org.apache.kafka.common.security.plain.PlainLoginModule required username='{{cluster.username}}' password='{{cluster.password}}';"
+{% elif cluster.sasl_protocol|upper == "SCRAM" %}
+sasl.jaas.config="org.apache.kafka.common.security.scram.ScramLoginModule required username='{{cluster.password}}' password='{{cluster.password}}';"
+{% elif cluster.sasl_protocol|upper == "GSSAPI" %}
+sasl.jaas.config="com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab='{{cluster.keytab}}' principal='{{cluster.principal}}';"
+{% endif %}
+
+{% endif %}
+
+{% if cluster.properties is defined %}
+{% for key,value in properties.properties.items() %}
+{{key}}="{{value}}"
+{% endfor %}
+{% endif %}

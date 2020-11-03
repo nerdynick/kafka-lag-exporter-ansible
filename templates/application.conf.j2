@@ -1,11 +1,11 @@
 kafka-lag-exporter {
     reporters {
-        {% if kafka_lag_exporter_reporters_prometheus_enabled %}
+        {% if kafka_lag_exporter_reporters_prometheus_enabled|bool %}
         prometheus {
             port = {{kafka_lag_exporter_reporters_prometheus_port}}
         }
         {% endif %}
-        {% if kafka_lag_exporter_reporters_prometheus_enabled %}
+        {% if kafka_lag_exporter_reporters_graphite_enabled|bool %}
         graphite {
             host = {{kafka_lag_exporter_reporters_graphite_host}}
             port = {{kafka_lag_exporter_reporters_graphite_port}}
@@ -21,25 +21,9 @@ kafka-lag-exporter {
         {% for cluster in kafka_lag_exporter_clusters %}
         {
             name = "{{cluster.name}}"
-            bootstrap-brokers = "{{ cluster.servers | join(':' + cluster.port|string + ',') }}:{{cluster.port}}"
+            bootstrap-brokers = "{{ cluster.servers | join(',') }}"
             consumer-properties = {
-                {% if cluster.ssl_enabled|bool %}
-                security.protocol="SSL"
-                {% for key,value in kafka_lag_exporter_internal_ssl_truststore_properties.items() %}
-                {{key}}="{{value}}"
-                {% endfor %}
-                {% if cluster.ssl_mutual_auth_enabled|bool %}
-                {% for key,value in kafka_lag_exporter_internal_ssl_keystore_properties.items() %}
-                {{key}}="{{value}}"
-                {% endfor %}
-                {% endif %}
-                {% endif %}
-
-                {% if cluster.properties is defined %}
-                {% for key,value in properties.properties.items() %}
-                {{key}}="{{value}}"
-                {% endfor %}
-                {% endif %}
+                {% include "kafka_client.conf.j2" %}
 
                 {% if cluster.consumer_properties is defined %}
                 {% for key,value in properties.consumer_properties.items() %}
@@ -48,39 +32,7 @@ kafka-lag-exporter {
                 {% endif %}
             }
             admin-client-properties = {
-                {% if cluster.ssl_enabled|bool %}
-                security.protocol="SSL"
-                {% for key,value in kafka_lag_exporter_internal_ssl_truststore_properties.items() %}
-                {{key}}="{{value}}"
-                {% endfor %}
-                {% if cluster.ssl_mutual_auth_enabled|bool %}
-                {% for key,value in kafka_lag_exporter_internal_ssl_keystore_properties.items() %}
-                {{key}}="{{value}}"
-                {% endfor %}
-                {% endif %}
-                {% endif %}
-
-                {% if cluster.sasl_protocol is defined and cluster.sasl_protocol != none %}
-                sasl.mechanism="{{cluster.sasl_protocol|upper}}"
-                {% if cluster.ssl_enabled|bool %}
-                security.protocol="SASL_SSL"
-                {% else %}
-                security.protocol="SASL_PLAINTEXT"
-                {% endif %}
-                {% if cluster.sasl_protocol|upper == "PLAIN" %}
-                sasl.jaas.config="org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{{cluster.username}}\" password="{{cluster.password}}\";"
-                {% elif cluster.sasl_protocol|upper == "SCRAM" %}
-                sasl.jaas.config="org.apache.kafka.common.security.scram.ScramLoginModule required username=\"{{cluster.password}}\" password="{{cluster.password}}\";"
-                {% elif cluster.sasl_protocol|upper == "GSSAPI" %}
-                sasl.jaas.config="com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab=\"{{cluster.keytab}}\" principal=\"{{cluster.principal}}\";"
-                {% endif %}
-                {% endif %}
-
-                {% if cluster.properties is defined %}
-                {% for key,value in properties.properties.items() %}
-                {{key}}="{{value}}"
-                {% endfor %}
-                {% endif %}
+                {% include "kafka_client.conf.j2" %}
                 
                 {% if cluster.admin_properties is defined %}
                 {% for key,value in properties.admin_properties.items() %}

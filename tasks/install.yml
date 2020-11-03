@@ -1,7 +1,16 @@
 ---
+- name: Creating Group
+  group:
+    name: "{{kafka_lag_exporter_group}}"
+- name: Creating User
+  user:
+    name: "{{kafka_lag_exporter_user}}"
+    comment: "Kafka User"
+    system: true
+    group: "{{kafka_lag_exporter_group}}"
 - name: Create Install Directory
   file:
-    path: "{{kafka_lag_exporter_install_dir}}"
+    path: "{{kafka_lag_exporter_extraction_dir}}"
     state: directory
     mode: 0755
     owner: "{{kafka_lag_exporter_user}}"
@@ -9,7 +18,7 @@
 - name: Downloading/Unarchiving from URL
   unarchive:
     src: "{{kafka_lag_exporter_download_url}}"
-    dest: "{{kafka_lag_exporter_install_dir}}"
+    dest: "{{kafka_lag_exporter_extraction_dir}}"
     creates: "{{kafka_lag_exporter_install_jar}}"
     remote_src: yes
     mode: 0755
@@ -19,7 +28,7 @@
 - name: Uploading/Unarchiving from URL
   unarchive:
     src: "{{kafka_lag_exporter_upload_path}}"
-    dest: "{{kafka_lag_exporter_install_dir}}"
+    dest: "{{kafka_lag_exporter_extraction_dir}}"
     creates: "{{kafka_lag_exporter_install_jar}}"
     remote_src: yes
     mode: 0755
@@ -35,7 +44,7 @@
     group: "{{kafka_lag_exporter_group}}"
 - name: Create Logs Directory
   file:
-    path: "{{kafka_broker.appender_log_path}}"
+    path: "{{kafka_lag_exporter_logging_dir}}"
     state: directory
     group: "{{kafka_lag_exporter_group}}"
     owner: "{{kafka_lag_exporter_user}}"
