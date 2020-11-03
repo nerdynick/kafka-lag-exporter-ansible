@@ -1,0 +1,28 @@
+---
+##
+# Installation Configs
+##
+kafka_lag_exporter_user: kafkalag
+kafka_lag_exporter_group: kafkalag 
+kafka_lag_exporter_config_dir: "/etc/kafka-lag-exporter"
+
+##
+# General Configs
+##
+kafka_lag_exporter_poll_interval: "30 seconds"
+kafka_lag_exporter_client_group_id: "kafkalagexporter"
+kafka_lag_exporter_client_timeout: "10 seconds"
+kafka_lag_exporter_lookup_table_size: 60
+
+##
+# Reporters
+##
+
+#Prometheus
+kafka_lag_exporter_reporters_prometheus_enabled: false
+kafka_lag_exporter_reporters_prometheus_port: 8000
+
+#Graphite
+kafka_lag_exporter_reporters_graphite_enabled: false
+kafka_lag_exporter_reporters_graphite_port: ""
+kafka_lag_exporter_reporters_graphite_host: ""
