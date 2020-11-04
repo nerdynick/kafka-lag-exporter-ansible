@@ -102,7 +102,7 @@ No other dependencies at this time.
 
 ## License
 
-MIT
+[MIT](LICENSE)
 
 ## Author Information
 
