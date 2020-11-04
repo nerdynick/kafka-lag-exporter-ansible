@@ -11,6 +11,7 @@ kafka_lag_exporter_user: kafkalag
 kafka_lag_exporter_group: kafkalag 
 
 kafka_lag_exporter_config_dir: "/etc/kafka-lag-exporter"
+kafka_lag_exporter_config_filename: application.conf
 kafka_lag_exporter_extraction_dir: "/opt/kafka-lag-exporter"
 
 kafka_lag_exporter_download: true
@@ -35,6 +36,7 @@ kafka_lag_exporter_metric_whitelist:
 
 # General Settings
 kafka_lag_exporter_logging_dir: "/var/log/kafka-lag-exporter"
+kafka_lag_exporter_logging_config_filename: logback.xml
 kafka_lag_exporter_logging_pattern: "%date{ISO8601} %-5level %logger{36} %X{akkaSource} - %msg %ex%n"
 kafka_lag_exporter_logging_root_level: "INFO"
 kafka_lag_exporter_logging_exporter_level: "INFO"
@@ -44,8 +46,6 @@ kafka_lag_exporter_logging_kafka_level: "INFO"
 kafka_lag_exporter_logging_policy_days: 7
 kafka_lag_exporter_logging_policy_total_size: "3GB"
 kafka_lag_exporter_logging_policy_file_size: "1GB"
-
-
 
 ##
 # Reporters

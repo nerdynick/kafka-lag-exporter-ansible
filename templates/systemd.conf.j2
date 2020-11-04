@@ -6,9 +6,7 @@ After=network.target
 Type=simple
 User={{ kafka_lag_exporter_user }}
 Group={{ kafka_lag_exporter_group }}
-ExecStart={{ kafka_lag_exporter_install_dir }}/bin/kafka-lag-exporter \
-    -Dconfig.file={{ kafka_lag_exporter_config_dir }}/application.conf \ 
-    -Dlogback.configurationFile={{ kafka_lag_exporter_config_dir }}/logback.xml
+ExecStart={{ kafka_lag_exporter_install_dir }}/bin/kafka-lag-exporter -Dconfig.file={{ kafka_lag_exporter_config_dir }}/{{ kafka_lag_exporter_config_filename }} -Dlogback.configurationFile={{ kafka_lag_exporter_config_dir }}/{{ kafka_lag_exporter_logging_config_filename }}
 LimitNOFILE=1000000
 TimeoutStopSec=180
 Restart=no

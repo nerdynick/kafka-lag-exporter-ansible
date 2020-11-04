@@ -2,7 +2,7 @@
 - name: Configuring Logging
   template:
     src: logback.xml.j2
-    dest: "{{ kafka_lag_exporter_config_dir }}/logback.xml"
+    dest: "{{ kafka_lag_exporter_config_dir }}/{{ kafka_lag_exporter_logging_config_filename }}"
     mode: 0644
     owner: "{{ kafka_lag_exporter_user }}"
     group: "{{ kafka_lag_exporter_group }}"
@@ -10,7 +10,7 @@
 - name: Configuring Kafka Lag Exporter
   template:
     src: application.conf.j2
-    dest: "{{ kafka_lag_exporter_config_dir }}/application.conf"
+    dest: "{{ kafka_lag_exporter_config_dir }}/{{ kafka_lag_exporter_config_filename }}"
     mode: 0644
     owner: "{{ kafka_lag_exporter_user }}"
     group: "{{ kafka_lag_exporter_group }}"
