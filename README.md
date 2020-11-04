@@ -47,9 +47,9 @@ Ansible Role for installing and configuring the [Kafka Lag Exporter](https://git
 | kafka_lag_exporter_reporters_graphite_enabled   | false            |  |
 | kafka_lag_exporter_reporters_graphite_host      |                  |  |
 | kafka_lag_exporter_reporters_graphite_port      |                  |  |
-| kafka_lag_exporter_clusters                     | []               | List of Kafka Clusters to gather consumer offsets/lags for. See below to paramaters. |
+| kafka_lag_exporter_clusters                     | []               | List of Kafka Clusters to gather consumer offsets/lags for. See `Cluster Settings` below for paramaters. |
 
-#### Defining Clusters
+#### Cluster Settings
 
 | Variable | Default | Description |
 | -------- | ------- | ----------- |

@@ -1,9 +1,22 @@
 ---
 - name: Install
   import_tasks: install.yml
+  tags: 
+  - install
 - name: SSL
   import_tasks: ssl.yml
+  tags:
+  - install
+  - ssl
+  - config
 - name: GSSAPI
   import_tasks: gssapi.yml
+  tags:
+  - install
+  - gssapi
+  - config
 - name: Config
   import_tasks: config.yml
+  tags:
+  - install
+  - config
