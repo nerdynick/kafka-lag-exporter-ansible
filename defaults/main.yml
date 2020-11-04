@@ -4,19 +4,17 @@
 ##
 kafka_lag_exporter_version: 0.6.5
 kafka_lag_exporter_service_name: "kafka-lag-exporter"
-kafka_lag_exporter_service_systemd_file: /etc/systemd/system/{{kafka_lag_exporter_service_name}}.service
-kafka_lag_exporter_service_systemd_override: /etc/systemd/system/{{kafka_lag_exporter_service_name}}.service.d/override.conf
+kafka_lag_exporter_service_systemd_file: /etc/systemd/system/{{ kafka_lag_exporter_service_name }}.service
+kafka_lag_exporter_service_systemd_override: /etc/systemd/system/{{ kafka_lag_exporter_service_name }}.service.d/override.conf
 
 kafka_lag_exporter_user: kafkalag
 kafka_lag_exporter_group: kafkalag 
 
 kafka_lag_exporter_config_dir: "/etc/kafka-lag-exporter"
 kafka_lag_exporter_extraction_dir: "/opt/kafka-lag-exporter"
-kafka_lag_exporter_install_dir: "{{kafka_lag_exporter_extraction_dir}}/kafka-lag-exporter-{{kafka_lag_exporter_version}}"
-kafka_lag_exporter_install_jar: "{{kafka_lag_exporter_install_dir}}/lib/com.lightbend.kafkalagexporter.kafka-lag-exporter-{{kafka_lag_exporter_version}}.jar"
 
 kafka_lag_exporter_download: true
-kafka_lag_exporter_download_url: "https://github.com/lightbend/kafka-lag-exporter/releases/download/v{{kafka_lag_exporter_version}}/kafka-lag-exporter-{{kafka_lag_exporter_version}}.zip"
+kafka_lag_exporter_download_url: "https://github.com/lightbend/kafka-lag-exporter/releases/download/v{{ kafka_lag_exporter_version }}/kafka-lag-exporter-{{ kafka_lag_exporter_version }}.zip"
 kafka_lag_exporter_upload: false
 kafka_lag_exporter_upload_path: ""
 

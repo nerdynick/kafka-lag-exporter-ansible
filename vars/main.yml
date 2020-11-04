@@ -7,3 +7,7 @@ kafka_lag_exporter_internal_ssl_keystore_properties:
 kafka_lag_exporter_internal_ssl_truststore_properties: 
   ssl.truststore.location: "{{ kafka_lag_exporter_ssl_truststore_dest }}"
   ssl.truststore.password: "{{ kafka_lag_exporter_ssl_truststore_store_password }}"
+
+
+kafka_lag_exporter_install_dir: "{{ kafka_lag_exporter_extraction_dir }}/kafka-lag-exporter-{{ kafka_lag_exporter_version }}"
+kafka_lag_exporter_install_jar: "{{ kafka_lag_exporter_install_dir }}/lib/com.lightbend.kafkalagexporter.kafka-lag-exporter-{{ kafka_lag_exporter_version }}.jar"
