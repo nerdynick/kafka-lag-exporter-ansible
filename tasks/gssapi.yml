@@ -1,15 +1,16 @@
 ---
 - name: Create Keytab Directories
   file:
-    path: "{{item.keytab|dirname}}"
+    path: "{{ item.keytab|dirname }}"
     state: directory
     mode: 0755
   with_items: "{{ kafka_lag_exporter_clusters }}"
   when: item.sasl_protocol|upper == "GSSAPI"
+
 - name: Copy Host Keystore to Host
   copy:
-    src: "{{item.keytab_src}}"
-    dest: "{{item.keytab}}"
+    src: "{{ item.keytab_src }}"
+    dest: "{{ item.keytab }}"
     mode: 0644
     owner: "{{ kafka_lag_exporter_user }}"
     group: "{{ kafka_lag_exporter_group }}"

@@ -4,8 +4,8 @@
   gather_facts: true
   tasks:
   - name: Install Java
-    import_role: 
+    import_role:
       name: java
   - name: Install/Config
-    import_role: 
+    import_role:
       name: kafka-lag-exporter-ansible

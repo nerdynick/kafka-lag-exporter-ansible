@@ -51,7 +51,7 @@
     mode: 0770
 - name: Create Service Override Directory
   file:
-    path: "{{kafka_lag_exporter_service_systemd_override | dirname }}"
+    path: "{{ kafka_lag_exporter_service_systemd_override | dirname }}"
     owner: "{{ kafka_lag_exporter_user }}"
     group: "{{ kafka_lag_exporter_group }}"
     state: directory
