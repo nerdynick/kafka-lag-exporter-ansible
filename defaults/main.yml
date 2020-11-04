@@ -75,10 +75,4 @@ kafka_lag_exporter_ssl_keystore_store_password: ""
 kafka_lag_exporter_ssl_truststore_src: ""
 kafka_lag_exporter_ssl_truststore_store_password:  ""
 
-kafka_lag_exporter_clusters: 
-- name: "Localhost"
-  servers: 
-  - localhost:9092
-  ssl_enabled: false
-  ssl_mutual_auth_enabled: false
-  sasl_protocol: none
+kafka_lag_exporter_clusters: []
