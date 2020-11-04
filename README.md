@@ -2,7 +2,7 @@
 
 Ansible Role for installing and configuring the [Kafka Lag Exporter](https://github.com/lightbend/kafka-lag-exporter) from Lightbend.
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/nerdynick/kafka-lag-exporter-ansible)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/nerdynick/kafka-lag-exporter-ansible?include_prereleases)
 ![Travis (.com)](https://img.shields.io/travis/com/nerdynick/kafka-lag-exporter-ansible)
 ![GitHub](https://img.shields.io/github/license/nerdynick/kafka-lag-exporter-ansible)
 ![GitHub All Releases](https://img.shields.io/github/downloads/nerdynick/kafka-lag-exporter-ansible/total)
