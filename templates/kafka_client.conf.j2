@@ -15,7 +15,7 @@ security.protocol="SSL"
 
 {% endif %}
 
-{% if cluster.sasl_protocol is defined and cluster.sasl_protocol| != "NONE" %}
+{% if cluster.sasl_protocol is defined and cluster.sasl_protocol|upper != "NONE" %}
 sasl.mechanism="{{ cluster.sasl_protocol | upper }}"
 
 {% if cluster.ssl_enabled is defined and cluster.ssl_enabled|bool %}
