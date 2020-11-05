@@ -36,6 +36,7 @@ kafka_lag_exporter_metric_whitelist:
 
 # General Settings
 kafka_lag_exporter_logging_dir: "/var/log/kafka-lag-exporter"
+kafka_lag_exporter_logging_filename: "exporter.log"
 kafka_lag_exporter_logging_config_filename: logback.xml
 kafka_lag_exporter_logging_pattern: "%date{ISO8601} %-5level %logger{36} %X{akkaSource} - %msg %ex%n"
 kafka_lag_exporter_logging_root_level: "INFO"
@@ -67,8 +68,8 @@ kafka_lag_exporter_reporters_graphite_host: ""
 # SSL Settings
 
 
-kafka_lag_exporter_ssl_keystore_dest: /var/ssl/private/kafka-lag-exporter.keystore.jks
-kafka_lag_exporter_ssl_truststore_dest: /var/ssl/private/kafka-lag-exporter.keystore.jks
+kafka_lag_exporter_ssl_keystore_dest: /var/ssl/private/{{ kafka_lag_exporter_service_name }}.keystore.jks
+kafka_lag_exporter_ssl_truststore_dest: /var/ssl/private/{{ kafka_lag_exporter_service_name }}.truststore.jks
 kafka_lag_exporter_ssl_keystore_src: ""
 kafka_lag_exporter_ssl_keystore_key_password: ""
 kafka_lag_exporter_ssl_keystore_store_password: ""
