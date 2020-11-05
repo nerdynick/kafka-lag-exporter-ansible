@@ -35,6 +35,13 @@
     owner: "{{ kafka_lag_exporter_user }}"
     group: "{{ kafka_lag_exporter_group }}"
   when: kafka_lag_exporter_upload|bool
+- name: Updating Install Directory Owner/Group
+  file:
+    path: "{{ kafka_lag_exporter_extraction_dir }}"
+    state: directory
+    owner: "{{ kafka_lag_exporter_user }}"
+    group: "{{ kafka_lag_exporter_group }}"
+    recurse: yes
 - name: Create Config directory
   file:
     path: "{{ kafka_lag_exporter_config_dir }}"
