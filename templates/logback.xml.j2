@@ -4,12 +4,12 @@
     <variable name="KAFKA_LAG_EXPORTER_KAFKA_LOG_LEVEL" value="${KAFKA_LAG_EXPORTER_KAFKA_LOG_LEVEL:-{{ kafka_lag_exporter_logging_kafka_level }}}" />
     
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>{{ kafka_lag_exporter_logging_dir }}/exporter.log</file>
+        <file>{{ kafka_lag_exporter_logging_dir }}/{{ kafka_lag_exporter_logging_filename }}</file>
         <encoder>
             <pattern>{{ kafka_lag_exporter_logging_pattern }}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>exporter-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <fileNamePattern>{{ kafka_lag_exporter_logging_filename }}.%d{yyyy-MM-dd}.%i</fileNamePattern>
             <maxFileSize>{{ kafka_lag_exporter_logging_policy_file_size }}</maxFileSize>    
             <maxHistory>{{ kafka_lag_exporter_logging_policy_days }}</maxHistory>
             <totalSizeCap>{{ kafka_lag_exporter_logging_policy_total_size }}</totalSizeCap>
