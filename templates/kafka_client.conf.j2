@@ -27,7 +27,7 @@ security.protocol="SASL_PLAINTEXT"
 {% if cluster.sasl_protocol|upper == "PLAIN" %}
 sasl.jaas.config="org.apache.kafka.common.security.plain.PlainLoginModule required username='{{ cluster.username }}' password='{{ cluster.password }}';"
 {% elif cluster.sasl_protocol|upper == "SCRAM" %}
-sasl.jaas.config="org.apache.kafka.common.security.scram.ScramLoginModule required username='{{ cluster.password }}' password='{{ cluster.password }}';"
+sasl.jaas.config="org.apache.kafka.common.security.scram.ScramLoginModule required username='{{ cluster.username }}' password='{{ cluster.password }}';"
 {% elif cluster.sasl_protocol|upper == "GSSAPI" %}
 sasl.jaas.config="com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab='{{ cluster.keytab }}' principal='{{ cluster.principal }}';"
 {% endif %}
