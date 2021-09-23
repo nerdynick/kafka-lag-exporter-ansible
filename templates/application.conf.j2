@@ -26,7 +26,7 @@ kafka-lag-exporter {
                 {% include "kafka_client.conf.j2" %}
 
                 {% if cluster.consumer_properties is defined %}
-                {% for key,value in properties.consumer_properties.items() %}
+                {% for key,value in cluster.consumer_properties.items() %}
                 {{ key }}="{{ value }}"
                 {% endfor %}
                 {% endif %}
@@ -35,7 +35,7 @@ kafka-lag-exporter {
                 {% include "kafka_client.conf.j2" %}
                 
                 {% if cluster.admin_properties is defined %}
-                {% for key,value in properties.admin_properties.items() %}
+                {% for key,value in cluster.admin_properties.items() %}
                 {{ key }}="{{ value }}"
                 {% endfor %}
                 {% endif %}
