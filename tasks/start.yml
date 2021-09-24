@@ -1,7 +1,6 @@
 ---
-- name: Restart Kafka Lag Exporter
+- name: Start Kafka Lag Exporter
   systemd:
     enabled: true
-    daemon_reload: true
     name: "{{ kafka_lag_exporter_service_name }}"
-    state: restarted
+    state: started

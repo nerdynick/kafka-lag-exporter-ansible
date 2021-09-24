@@ -1,3 +1,5 @@
 ---
 - name: restart lag-exporter
   include_tasks: tasks/restart.yml
+- name: start lag-exporter
+  include_tasks: tasks/start.yml

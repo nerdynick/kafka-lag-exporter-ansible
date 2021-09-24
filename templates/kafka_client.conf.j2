@@ -35,7 +35,7 @@ sasl.jaas.config="com.sun.security.auth.module.Krb5LoginModule required useKeyTa
 {% endif %}
 
 {% if cluster.properties is defined %}
-{% for key,value in properties.properties.items() %}
+{% for key,value in cluster.properties.items() %}
 {{ key }}="{{ value }}"
 {% endfor %}
 {% endif %}
